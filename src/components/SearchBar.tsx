@@ -1,6 +1,7 @@
 import { Box } from "@mui/material";
 import { ChangeEvent, useContext } from "react";
 import { SearchBarContext } from "../context/SearchBarContext";
+import SearchIcon from "@mui/icons-material/Search";
 
 const SearchBar = () => {
   const { setSearchTerm } = useContext(SearchBarContext);
@@ -10,16 +11,19 @@ const SearchBar = () => {
   };
 
   return (
-    <Box>
+    <Box sx={{ display: "flex", justifyContent: "center" }}>
       <input
         style={{
-          width: "60%",
-          height: "30px",
-          borderRadius: "10px",
+          width: "40%",
+          height: "40px",
           border: "none",
+          fontSize: "15px",
         }}
         onChange={handleChange}
       />
+      <button style={{ width: "40px" }}>
+        <SearchIcon />
+      </button>
     </Box>
   );
 };
