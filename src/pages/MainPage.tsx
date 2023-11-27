@@ -1,25 +1,24 @@
-import { Box, CircularProgress, Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import SearchBar from "../components/SearchBar";
 import WbSunnyIcon from "@mui/icons-material/WbSunny";
-import { get_background_image } from "../API";
+import img from "../assets/pexels-stein-egil-liland-12035611.jpg";
 import { useEffect, useState } from "react";
 
 function MainPage() {
-  const [image, setImage] = useState("");
-  //   const [loading, setLoading] = useState(true);
-  //   useEffect(() => {
-  //     const fetchData = async () => {
-  //       try {
-  //         const result = await get_background_image();
-  //         setImage(result);
-  //         setLoading(!loading);
-  //       } catch (error) {
-  //         console.log(error);
-  //       }
-  //     };
+  const [scrollPosition, setScrollPosition] = useState(0);
 
-  //     fetchData();
-  //   }, []);
+  const handleScroll = () => {
+    setScrollPosition(window.scrollY);
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+  const backgroundColor = scrollPosition > 0 ? " #273746 " : "transparent";
 
   return (
     <Box
@@ -27,12 +26,28 @@ function MainPage() {
         textAlign: "center",
         margin: "0 auto",
         height: "900px",
-        // backgroundImage: `url(${image})`,
-        backgroundColor: "beige",
+        backgroundImage: `url(${img})`,
+        backgroundSize: "cover",
+        paddingTop: "60px",
       }}
     >
-      <Typography sx={{ fontWeight: 700, fontSize: "50px" }}>
-        Weather <WbSunnyIcon fontSize="large" sx={{ color: "yellow" }} />
+      <Typography
+        sx={{
+          fontWeight: 700,
+          fontSize: "25px",
+          textAlign: "left",
+          paddingTop: "10px",
+          paddingLeft: "10px",
+          paddingBottom: "10px",
+          color: "white",
+          position: "fixed",
+          top: "0px",
+          width: "100%",
+          backgroundColor: backgroundColor,
+          tranition: "background-color 0.10s ease",
+        }}
+      >
+        Weather <WbSunnyIcon fontSize="medium" sx={{ color: "orange" }} />
       </Typography>
       <SearchBar />
     </Box>
