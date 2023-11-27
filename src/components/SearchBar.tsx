@@ -11,14 +11,21 @@ const SearchBar = () => {
   };
 
   return (
-    <Box sx={{ display: "flex", justifyContent: "center" }}>
+    <Box
+      sx={{
+        display: "flex",
+        justifyContent: "center",
+        marginTop: "10px",
+      }}
+    >
       <input
         style={{
           width: "40%",
-          height: "40px",
+          height: "35px",
           border: "none",
           fontSize: "15px",
         }}
+        placeholder="Search"
         onChange={handleChange}
       />
       <button style={{ width: "40px" }}>
