@@ -1,16 +1,14 @@
 import axios from "axios";
 
-const get_background_image = async () => {
-  const request = await axios.get("https://api.unsplash.com/photos/random", {
-    headers: {
-      Authorization: "Client-ID wZIRQnw7XaGOcE9ERzlHhUMffk9g8Y44uSecXoVIkp4",
-    },
+const get_data = async (city: string) => {
+  const request = await axios.get("api.openweathermap.org/data/2.5/weather", {
     params: {
-      query: "sky",
+      q: city,
+      APPID: "39beb0058dea7387317a41b76719c76e",
     },
   });
 
-  return request.data.urls.full;
+  return request;
 };
 
-export { get_background_image };
+export { get_data };

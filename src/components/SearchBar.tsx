@@ -1,20 +1,27 @@
 import { Box } from "@mui/material";
-import { ChangeEvent, FormEvent, useContext, useState } from "react";
+import { ChangeEvent, FormEvent, useContext, useEffect } from "react";
 import { SearchBarContext } from "../context/SearchBarContext";
 import SearchIcon from "@mui/icons-material/Search";
+import { get_data } from "../API";
 
 const SearchBar = () => {
-  const { setSearchTerm } = useContext(SearchBarContext);
-  const [value, setValue] = useState("");
+  const { searchTerm, setSearchTerm } = useContext(SearchBarContext);
+
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     const response = await get_data(searchTerm);
+  //     console.log(response.data);
+  //   };
+  //   fetchData();
+  // }, []);
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(event.target.value);
-    setValue(event.target.value);
   };
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    setValue("");
+    console.log(searchTerm);
   };
 
   return (
@@ -49,7 +56,7 @@ const SearchBar = () => {
         }}
         placeholder="Search"
         onChange={handleChange}
-        value={value}
+        value={searchTerm}
       />
     </Box>
   );
