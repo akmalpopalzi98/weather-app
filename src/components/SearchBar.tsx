@@ -5,15 +5,17 @@ import SearchIcon from "@mui/icons-material/Search";
 import { get_data } from "../API";
 
 const SearchBar = () => {
-  const { searchTerm, setSearchTerm } = useContext(SearchBarContext);
+  const { searchTerm, setSearchTerm, setWeatherData } =
+    useContext(SearchBarContext);
 
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     const response = await get_data(searchTerm);
-  //     console.log(response.data);
-  //   };
-  //   fetchData();
-  // }, []);
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await get_data(searchTerm);
+      setWeatherData(response.data);
+      console.log(response.data);
+    };
+    fetchData();
+  }, []);
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(event.target.value);
