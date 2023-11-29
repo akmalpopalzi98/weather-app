@@ -3,28 +3,28 @@ import { createContext, useState } from "react";
 const defaultContext = {
   searchTerm: "",
   setSearchTerm: () => {},
-  weatherData: {},
-  setWeatherData: () => {},
+  currentWeather: {},
+  setCurrentWeather: () => {},
 };
 
 interface SearchContextType {
   searchTerm: string;
   setSearchTerm: React.Dispatch<React.SetStateAction<string>>;
-  weatherData: {};
-  setWeatherData: React.Dispatch<React.SetStateAction<{}>>;
+  currentWeather: {};
+  setCurrentWeather: React.Dispatch<React.SetStateAction<{}>>;
 }
 
 const SearchBarContext = createContext<SearchContextType>(defaultContext);
 
 const SearchBarProvider = ({ children }: { children: React.ReactNode }) => {
   const [searchTerm, setSearchTerm] = useState("");
-  const [weatherData, setWeatherData] = useState({});
+  const [currentWeather, setCurrentWeather] = useState({});
 
   const sharedObject = {
     searchTerm,
     setSearchTerm,
-    weatherData,
-    setWeatherData,
+    currentWeather,
+    setCurrentWeather,
   };
 
   return (
