@@ -1,5 +1,5 @@
 import { Box } from "@mui/material";
-import { ChangeEvent, FormEvent, useContext, useEffect } from "react";
+import { ChangeEvent, FormEvent, useContext, useEffect, useState } from "react";
 import { SearchBarContext } from "../context/SearchBarContext";
 import SearchIcon from "@mui/icons-material/Search";
 import { get_data } from "../API";
@@ -7,23 +7,26 @@ import { get_data } from "../API";
 const SearchBar = () => {
   const { searchTerm, setSearchTerm, setWeatherData } =
     useContext(SearchBarContext);
+  const [value, setValue] = useState("");
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const response = await get_data(searchTerm);
-      setWeatherData(response.data);
-      console.log(response.data);
-    };
-    fetchData();
-  }, []);
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     const response = await get_data(searchTerm);
+  //     setWeatherData(response.data);
+  //     console.log(response.data);
+  //   };
+  //   fetchData();
+  // }, []);
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(event.target.value);
+    setValue(event.target.value);
   };
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     console.log(searchTerm);
+    setValue("");
   };
 
   return (
@@ -58,7 +61,7 @@ const SearchBar = () => {
         }}
         placeholder="Search"
         onChange={handleChange}
-        value={searchTerm}
+        value={value}
       />
     </Box>
   );
