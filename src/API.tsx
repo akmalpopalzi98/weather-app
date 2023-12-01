@@ -7,6 +7,7 @@ const get_current_data = async (city: string) => {
       params: {
         q: city || "london",
         appid: "39beb0058dea7387317a41b76719c76e",
+        units: "metric",
       },
     }
   );
@@ -21,6 +22,7 @@ const get_forecast_data = async (city: string) => {
       params: {
         q: city || "london",
         appid: "39beb0058dea7387317a41b76719c76e",
+        units: "metric",
       },
     }
   );
