@@ -13,7 +13,6 @@ const SearchBar = () => {
     try {
       const response = await get_current_data(city);
       setCurrentWeather(response.data);
-      console.log(response.data);
     } catch (error) {
       console.log(error);
     }
@@ -28,10 +27,10 @@ const SearchBar = () => {
     setValue(event.target.value);
   };
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setValue("");
-    fetchCurrentData(searchTerm);
+    await fetchCurrentData(searchTerm);
   };
 
   return (
