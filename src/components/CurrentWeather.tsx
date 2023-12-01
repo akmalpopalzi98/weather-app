@@ -9,21 +9,14 @@ const CurrentWeather = () => {
   return (
     <Box
       sx={{
-        display: "flex",
-        justifyContent: "center",
+        backgroundColor: "rgba(39,59,70,0.5)",
+        width: "70%",
         height: "50%",
+        margin: "0 auto",
+        marginTop: "20px",
       }}
     >
-      <Box
-        sx={{
-          backgroundColor: "rgba(39,59,70,0.5)",
-          marginTop: "20px",
-          width: "70%",
-          height: "80%",
-        }}
-      >
-        <Typography>{TypedData.name}</Typography>
-      </Box>
+      <Typography>{TypedData.name}</Typography>
     </Box>
   );
 };
