@@ -10,7 +10,9 @@ type CurrentWeatherType = {
   weather: {
     description: string;
     main: string;
+    icon: string;
   }[];
+  dt: number;
 };
 
 export default CurrentWeatherType;
