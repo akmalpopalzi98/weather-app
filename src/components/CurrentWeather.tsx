@@ -1,4 +1,4 @@
-import { Box, Typography } from "@mui/material";
+import { Box, CircularProgress, Typography } from "@mui/material";
 import { useContext } from "react";
 import { SearchBarContext } from "../context/SearchBarContext";
 import CurrentWeatherType from "../types";
@@ -18,11 +18,23 @@ const CurrentWeather = () => {
   console.log(TypedData);
 
   if (!TypedData.main) {
-    return <Box>Loading</Box>;
+    return (
+      <Box>
+        <CircularProgress />
+      </Box>
+    );
   } else {
     currentTemp = Math.round(TypedData.main.temp);
     weatherDesc = capitalize(TypedData.weather[0].description);
   }
+
+  // Get the current date in the desired format
+  const formattedCurrentDate = new Date().toLocaleDateString("en-US", {
+    weekday: "long",
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
 
   return (
     <Box
@@ -34,12 +46,32 @@ const CurrentWeather = () => {
         marginTop: "20px",
       }}
     >
-      <Typography sx={{ fontSize: "30px" }}>{TypedData.name}</Typography>
-      <Box>
+      <Box
+        sx={{
+          backgroundColor: "#a04000",
+          height: "100%",
+          width: "30%",
+          display: "flex",
+          flexDirection: "column", // Display items vertically
+          justifyContent: "space-evenly", // Space items evenly vertically
+          alignItems: "center", // Center items horizontally
+        }}
+      >
+        <Typography
+          sx={{
+            fontSize: "30px",
+          }}
+        >
+          {TypedData.name}
+        </Typography>
+        <img
+          src={`https://openweathermap.org/img/wn/${TypedData.weather[0].icon}@2x.png`}
+        />
         <Typography sx={{ fontSize: "30px" }}>
           {currentTemp + units.CELSIUS}
         </Typography>
         <Typography>{weatherDesc}</Typography>
+        <Typography>Today - {formattedCurrentDate}</Typography>
       </Box>
     </Box>
   );
