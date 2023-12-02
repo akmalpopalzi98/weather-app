@@ -14,7 +14,7 @@ const SearchBar = () => {
       const response = await get_current_data(city);
       setCurrentWeather(response.data);
     } catch (error) {
-      console.log(error);
+      alert("Location not found");
     }
   };
 
