@@ -18,6 +18,7 @@ const CurrentWeather = () => {
   let maxTemp;
   let minTemp;
   let feelsLike;
+  let humidity;
 
   console.log(TypedData);
 
@@ -33,6 +34,7 @@ const CurrentWeather = () => {
     maxTemp = Math.round(TypedData.main.temp_max);
     minTemp = Math.round(TypedData.main.temp_min);
     feelsLike = Math.round(TypedData.main.feels_like);
+    humidity = TypedData.main.humidity;
   }
 
   return (
@@ -65,19 +67,42 @@ const CurrentWeather = () => {
           height: "100%", // Adjust the height as needed
         }}
       >
-        {/* Max Temperature */}
+        {/* Max Temperature and Humidity*/}
         <Box
           sx={{
-            height: "48%", // 48% for two items to fit
+            height: "48%",
+
             display: "flex",
-            flexDirection: "column",
-            justifyContent: "space-evenly",
+            flexDirection: "row",
+            justifyContent: "space-between",
           }}
         >
-          <Typography>Max Temperature</Typography>
-          <Typography sx={{ fontSize: "60px" }}>
-            {maxTemp + units.CELSIUS}
-          </Typography>
+          {/* Max Temperature*/}
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "space-evenly",
+              width: "48%",
+            }}
+          >
+            <Typography>Max Temperature</Typography>
+            <Typography sx={{ fontSize: "60px" }}>
+              {maxTemp + units.CELSIUS}
+            </Typography>
+          </Box>
+          {/* Humidity */}
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "space-evenly",
+              width: "48%",
+            }}
+          >
+            <Typography>Humidity</Typography>
+            <Typography sx={{ fontSize: "60px" }}>{humidity + "%"}</Typography>
+          </Box>
         </Box>
 
         {/* Container for Min Temperature and Feels Like */}
