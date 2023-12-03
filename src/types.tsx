@@ -4,7 +4,7 @@ type CurrentWeatherType = {
     temp: number;
     temp_max: number;
     temp_min: number;
-    feels_like: string;
+    feels_like: number;
     humidity: number;
   };
   weather: {
