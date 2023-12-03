@@ -3,6 +3,7 @@ import { useContext } from "react";
 import { SearchBarContext } from "../context/SearchBarContext";
 import CurrentWeatherType from "../types";
 import { capitalize } from "../helpers/utils";
+import WeatherCard from "./WeatherCard";
 
 const units = {
   CELSIUS: "°C",
@@ -14,6 +15,9 @@ const CurrentWeather = () => {
 
   let currentTemp;
   let weatherDesc;
+  let maxTemp;
+  let minTemp;
+  let feelsLike;
 
   console.log(TypedData);
 
@@ -26,52 +30,95 @@ const CurrentWeather = () => {
   } else {
     currentTemp = Math.round(TypedData.main.temp);
     weatherDesc = capitalize(TypedData.weather[0].description);
+    maxTemp = Math.round(TypedData.main.temp_max);
+    minTemp = Math.round(TypedData.main.temp_min);
+    feelsLike = Math.round(TypedData.main.feels_like);
   }
-
-  // Get the current date in the desired format
-  const formattedCurrentDate = new Date().toLocaleDateString("en-US", {
-    weekday: "long",
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  });
 
   return (
     <Box
       sx={{
         backgroundColor: "rgba(39,59,70,0.5)",
-        width: "70%",
-        height: "50%",
+        width: "80%",
+        height: "40%",
         margin: "0 auto",
-        marginTop: "20px",
+        marginTop: "40px",
+        display: "flex",
+        justifyContent: "flex-start",
+        gap: "30px",
       }}
     >
+      {/* WeatherCard on the left */}
+      <WeatherCard
+        weatherData={TypedData}
+        currentTemp={currentTemp}
+        weatherDesc={weatherDesc}
+      />
+
+      {/* Container for Max Temperature, Min Temperature, and Feels Like */}
       <Box
         sx={{
-          backgroundColor: "#a04000",
-          height: "100%",
-          width: "30%",
           display: "flex",
-          flexDirection: "column", // Display items vertically
-          justifyContent: "space-evenly", // Space items evenly vertically
-          alignItems: "center", // Center items horizontally
+          flexDirection: "column",
+          justifyContent: "space-between",
+          width: "70%", // Adjust the width as needed
+          height: "100%", // Adjust the height as needed
         }}
       >
-        <Typography
+        {/* Max Temperature */}
+        <Box
           sx={{
-            fontSize: "30px",
+            height: "48%", // 48% for two items to fit
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "space-evenly",
           }}
         >
-          {TypedData.name}
-        </Typography>
-        <img
-          src={`https://openweathermap.org/img/wn/${TypedData.weather[0].icon}@2x.png`}
-        />
-        <Typography sx={{ fontSize: "30px" }}>
-          {currentTemp + units.CELSIUS}
-        </Typography>
-        <Typography>{weatherDesc}</Typography>
-        <Typography>Today - {formattedCurrentDate}</Typography>
+          <Typography>Max Temperature</Typography>
+          <Typography sx={{ fontSize: "60px" }}>
+            {maxTemp + units.CELSIUS}
+          </Typography>
+        </Box>
+
+        {/* Container for Min Temperature and Feels Like */}
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: "space-between",
+            height: "48%", // 48% for two items to fit
+          }}
+        >
+          {/* Min Temperature */}
+          <Box
+            sx={{
+              width: "48%", // 48% for two items to fit
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "space-evenly",
+            }}
+          >
+            <Typography>Min Temperature</Typography>
+            <Typography sx={{ fontSize: "60px" }}>
+              {minTemp + units.CELSIUS}
+            </Typography>
+          </Box>
+
+          {/* Feels Like */}
+          <Box
+            sx={{
+              width: "48%", // 48% for two items to fit
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "space-evenly",
+            }}
+          >
+            <Typography>Feels Like</Typography>
+            <Typography sx={{ fontSize: "60px" }}>
+              {feelsLike + units.CELSIUS}
+            </Typography>
+          </Box>
+        </Box>
       </Box>
     </Box>
   );
