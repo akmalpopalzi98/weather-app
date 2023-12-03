@@ -20,8 +20,6 @@ const CurrentWeather = () => {
   let feelsLike;
   let humidity;
 
-  console.log(TypedData);
-
   if (!TypedData.main) {
     return (
       <Box>
