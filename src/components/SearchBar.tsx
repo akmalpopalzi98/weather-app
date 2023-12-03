@@ -7,6 +7,7 @@ import { get_current_data } from "../API";
 const SearchBar = () => {
   const { searchTerm, setSearchTerm, setCurrentWeather } =
     useContext(SearchBarContext);
+
   const [value, setValue] = useState("");
 
   const fetchCurrentData = async (city: string) => {
@@ -19,7 +20,9 @@ const SearchBar = () => {
   };
 
   useEffect(() => {
-    fetchCurrentData(searchTerm);
+    const storedData = localStorage.getItem("store");
+    if (storedData) fetchCurrentData(storedData);
+    else fetchCurrentData(searchTerm);
   }, []);
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -30,6 +33,7 @@ const SearchBar = () => {
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setValue("");
+    localStorage.setItem("store", searchTerm);
     await fetchCurrentData(searchTerm);
   };
 
