@@ -2,10 +2,10 @@ import { Box } from "@mui/material";
 import { ChangeEvent, FormEvent, useContext, useEffect, useState } from "react";
 import { SearchBarContext } from "../context/SearchBarContext";
 import SearchIcon from "@mui/icons-material/Search";
-import { get_current_data } from "../API";
+import { get_current_data, get_forecast_data } from "../API";
 
 const SearchBar = () => {
-  const { searchTerm, setSearchTerm, setCurrentWeather } =
+  const { searchTerm, setSearchTerm, setCurrentWeather, setForecastWeather } =
     useContext(SearchBarContext);
 
   const [value, setValue] = useState("");
@@ -19,10 +19,25 @@ const SearchBar = () => {
     }
   };
 
+  const fetchForecastData = async (city: string) => {
+    try {
+      const response = await get_forecast_data(city);
+      // setCurrentWeather(response.data);
+      setForecastWeather(response.data);
+    } catch (error) {
+      alert("Location not found");
+    }
+  };
+
   useEffect(() => {
-    const storedData = localStorage.getItem("store");
-    if (storedData) fetchCurrentData(storedData);
-    else fetchCurrentData(searchTerm);
+    // const storedData = localStorage.getItem("store");
+    // if (storedData) fetchCurrentData(storedData);
+    // else {
+    //   fetchCurrentData(searchTerm);
+    //   fetchForecastData(searchTerm);
+    // }
+    fetchCurrentData(searchTerm);
+    fetchForecastData(searchTerm);
   }, []);
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -35,6 +50,7 @@ const SearchBar = () => {
     setValue("");
     // localStorage.setItem("store", searchTerm); May remove
     await fetchCurrentData(searchTerm);
+    await fetchForecastData(searchTerm);
   };
 
   return (

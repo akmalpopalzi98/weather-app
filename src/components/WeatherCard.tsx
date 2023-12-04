@@ -1,5 +1,5 @@
 import { Box, Typography } from "@mui/material";
-import CurrentWeatherType from "../types";
+import { CurrentWeatherType } from "../types";
 
 const units = {
   CELSIUS: "°C",
@@ -32,7 +32,7 @@ const WeatherCard = ({
         alignItems: "center", // Center items horizontally
       }}
     >
-      <Typography sx={{}}>{weatherData.name}</Typography>
+      <Typography>{weatherData.name}</Typography>
       <img
         src={`https://openweathermap.org/img/wn/${weatherData.weather[0].icon}@2x.png`}
       />

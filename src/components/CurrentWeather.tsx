@@ -1,7 +1,7 @@
 import { Box, CircularProgress, Typography } from "@mui/material";
 import { useContext } from "react";
 import { SearchBarContext } from "../context/SearchBarContext";
-import CurrentWeatherType from "../types";
+import { CurrentWeatherType } from "../types";
 import { capitalize } from "../helpers/utils";
 import WeatherCard from "./WeatherCard";
 
