@@ -1,16 +1,33 @@
 import axios from "axios";
 
-const get_background_image = async () => {
-  const request = await axios.get("https://api.unsplash.com/photos/random", {
-    headers: {
-      Authorization: "Client-ID wZIRQnw7XaGOcE9ERzlHhUMffk9g8Y44uSecXoVIkp4",
-    },
-    params: {
-      query: "sky",
-    },
-  });
+const get_current_data = async (city: string) => {
+  const request = await axios.get(
+    "https://api.openweathermap.org/data/2.5/weather",
+    {
+      params: {
+        q: city || "london",
+        appid: "39beb0058dea7387317a41b76719c76e",
+        units: "metric",
+      },
+    }
+  );
 
-  return request.data.urls.full;
+  return request;
 };
 
-export { get_background_image };
+const get_forecast_data = async (city: string) => {
+  const request = await axios.get(
+    "https://api.openweathermap.org/data/2.5/forecast",
+    {
+      params: {
+        q: city || "london",
+        appid: "39beb0058dea7387317a41b76719c76e",
+        units: "metric",
+      },
+    }
+  );
+
+  return request;
+};
+
+export { get_current_data, get_forecast_data };

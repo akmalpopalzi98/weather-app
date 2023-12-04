@@ -3,7 +3,8 @@ import SearchBar from "../components/SearchBar";
 import WbSunnyIcon from "@mui/icons-material/WbSunny";
 import img from "../assets/pexels-stein-egil-liland-12035611.jpg";
 import { useEffect, useState } from "react";
-import WeatherPage from "./WeatherPage";
+import CurrentWeather from "../components/CurrentWeather";
+import TodaysForecast from "../components/TodaysForecast";
 
 function MainPage() {
   const [scrollPosition, setScrollPosition] = useState(0);
@@ -51,7 +52,17 @@ function MainPage() {
         Weather <WbSunnyIcon fontSize="medium" sx={{ color: "orange" }} />
       </Typography>
       <SearchBar />
-      <WeatherPage />
+      <Box
+        sx={{
+          height: "90%",
+          display: "flex",
+          gap: "20px",
+          justifyContent: "space-evenly",
+        }}
+      >
+        <CurrentWeather />
+        <TodaysForecast />
+      </Box>
     </Box>
   );
 }

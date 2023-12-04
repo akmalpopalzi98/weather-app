@@ -1,20 +1,40 @@
 import { Box } from "@mui/material";
-import { ChangeEvent, FormEvent, useContext, useState } from "react";
+import { ChangeEvent, FormEvent, useContext, useEffect, useState } from "react";
 import { SearchBarContext } from "../context/SearchBarContext";
 import SearchIcon from "@mui/icons-material/Search";
+import { get_current_data } from "../API";
 
 const SearchBar = () => {
-  const { setSearchTerm } = useContext(SearchBarContext);
+  const { searchTerm, setSearchTerm, setCurrentWeather } =
+    useContext(SearchBarContext);
+
   const [value, setValue] = useState("");
+
+  const fetchCurrentData = async (city: string) => {
+    try {
+      const response = await get_current_data(city);
+      setCurrentWeather(response.data);
+    } catch (error) {
+      alert("Location not found");
+    }
+  };
+
+  useEffect(() => {
+    const storedData = localStorage.getItem("store");
+    if (storedData) fetchCurrentData(storedData);
+    else fetchCurrentData(searchTerm);
+  }, []);
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(event.target.value);
     setValue(event.target.value);
   };
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setValue("");
+    // localStorage.setItem("store", searchTerm); May remove
+    await fetchCurrentData(searchTerm);
   };
 
   return (
