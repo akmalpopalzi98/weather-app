@@ -39,9 +39,9 @@ const CurrentWeather = () => {
     <Box
       sx={{
         backgroundColor: "rgba(39,59,70,0.5)",
-        width: "80%",
+        width: "57%",
         height: "40%",
-        margin: "0 auto",
+        // margin: "0 auto",
         marginTop: "40px",
         display: "flex",
         justifyContent: "flex-start",
