@@ -33,7 +33,7 @@ const SearchBar = () => {
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setValue("");
-    localStorage.setItem("store", searchTerm);
+    // localStorage.setItem("store", searchTerm); May remove
     await fetchCurrentData(searchTerm);
   };
 
