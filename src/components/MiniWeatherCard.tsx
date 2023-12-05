@@ -1,10 +1,12 @@
 import { Box, Typography } from "@mui/material";
 import { MiniCardType } from "../types";
 import { units } from "./WeatherCard";
+import { capitalize } from "../helpers/utils";
 
 const MiniWeatherCard = ({ data }: { data: MiniCardType }) => {
   const date = new Date(data.dt_txt).getHours();
   const amOrPm = date > 11 ? "pm" : "am";
+
   return (
     <Box
       sx={{
@@ -15,14 +17,20 @@ const MiniWeatherCard = ({ data }: { data: MiniCardType }) => {
         justifyContent: "space-around",
       }}
     >
-      <Typography>
+      <Typography sx={{ flexBasis: "25%" }}>
         {date}
         {amOrPm}
       </Typography>
       <img
         src={`https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`}
+        style={{ flexBasis: "25%" }}
       />
-      <Typography>{Math.round(data.main.temp) + units.CELSIUS}</Typography>
+      <Typography sx={{ flexBasis: "25%" }}>
+        {capitalize(data.weather[0].description)}
+      </Typography>
+      <Typography sx={{ flexBasis: "25%" }}>
+        {Math.round(data.main.temp) + units.CELSIUS}
+      </Typography>
     </Box>
   );
 };
