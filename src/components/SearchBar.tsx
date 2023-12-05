@@ -1,7 +1,6 @@
 import { Box } from "@mui/material";
 import { ChangeEvent, FormEvent, useContext, useEffect, useState } from "react";
 import { SearchBarContext } from "../context/SearchBarContext";
-import SearchIcon from "@mui/icons-material/Search";
 import { get_current_data, get_forecast_data } from "../API";
 
 const SearchBar = () => {
@@ -63,18 +62,6 @@ const SearchBar = () => {
       component={"form"}
       onSubmit={handleSubmit}
     >
-      <i
-        style={{
-          backgroundColor: "white",
-          width: "50px",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          cursor: "pointer",
-        }}
-      >
-        <SearchIcon />
-      </i>
       <input
         style={{
           width: "40%",
@@ -82,6 +69,7 @@ const SearchBar = () => {
           border: "none",
           fontSize: "15px",
           textAlign: "center",
+          padding: "0",
         }}
         placeholder="Search"
         onChange={handleChange}
