@@ -20,8 +20,11 @@ const TodaysForecast = () => {
       sx={{
         height: "40%",
         width: "30%",
-        backgroundColor: "grey",
+        backgroundColor: "rgba(39,59,70,0.5)",
         marginTop: "40px",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "space-evenly",
       }}
     >
       <Typography>Todays Forecast</Typography>

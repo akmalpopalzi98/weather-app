@@ -1,7 +1,7 @@
 import { Box, Typography } from "@mui/material";
 import { CurrentWeatherType } from "../types";
 
-const units = {
+export const units = {
   CELSIUS: "°C",
 };
 
