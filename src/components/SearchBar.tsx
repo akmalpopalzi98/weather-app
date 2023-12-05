@@ -2,6 +2,7 @@ import { Box } from "@mui/material";
 import { ChangeEvent, FormEvent, useContext, useEffect, useState } from "react";
 import { SearchBarContext } from "../context/SearchBarContext";
 import { get_current_data, get_forecast_data } from "../API";
+import useLocation from "../hooks/useLocation";
 
 const SearchBar = () => {
   const { searchTerm, setSearchTerm, setCurrentWeather, setForecastWeather } =
@@ -9,18 +10,27 @@ const SearchBar = () => {
 
   const [value, setValue] = useState("");
 
-  const fetchCurrentData = async (city: string) => {
+  const fetchLocation = async () => {
+    const locationObj = await useLocation();
+    return locationObj;
+  };
+
+  const fetchCurrentData = async (city: string, lat?: number, lon?: number) => {
     try {
-      const response = await get_current_data(city);
+      const response = await get_current_data(city, lat, lon);
       setCurrentWeather(response.data);
     } catch (error) {
       alert("Location not found");
     }
   };
 
-  const fetchForecastData = async (city: string) => {
+  const fetchForecastData = async (
+    city: string,
+    lat?: number,
+    lon?: number
+  ) => {
     try {
-      const response = await get_forecast_data(city);
+      const response = await get_forecast_data(city, lat, lon);
       // setCurrentWeather(response.data);
       setForecastWeather(response.data);
     } catch (error) {
@@ -29,14 +39,25 @@ const SearchBar = () => {
   };
 
   useEffect(() => {
-    // const storedData = localStorage.getItem("store");
-    // if (storedData) fetchCurrentData(storedData);
-    // else {
-    //   fetchCurrentData(searchTerm);
-    //   fetchForecastData(searchTerm);
-    // }
-    fetchCurrentData(searchTerm);
-    fetchForecastData(searchTerm);
+    const fetchData = async () => {
+      try {
+        const locationObj = await fetchLocation();
+
+        if (locationObj) {
+          const { latitude, longitude } = locationObj;
+          await fetchCurrentData(searchTerm, latitude, longitude);
+          await fetchForecastData(searchTerm, latitude, longitude);
+        } else {
+          // Handle case where location data is not available
+          fetchCurrentData(searchTerm);
+          fetchForecastData(searchTerm);
+        }
+      } catch (error) {
+        console.error("Error fetching data:");
+      }
+    };
+
+    fetchData();
   }, []);
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
