@@ -25,7 +25,7 @@ const WeatherCard = ({
       sx={{
         backgroundColor: "rgba(160, 64, 0, 0.8)",
         height: "100%",
-        width: "30%",
+        width: "40%",
         display: "flex",
         flexDirection: "column", // Display items vertically
         justifyContent: "space-evenly", // Space items evenly vertically

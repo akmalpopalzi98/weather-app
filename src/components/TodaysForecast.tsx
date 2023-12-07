@@ -1,4 +1,4 @@
-import { Box, Typography } from "@mui/material";
+import { Box, CircularProgress, Typography } from "@mui/material";
 import MiniWeatherCard from "./MiniWeatherCard";
 import { useContext } from "react";
 import { SearchBarContext } from "../context/SearchBarContext";
@@ -14,6 +14,22 @@ const TodaysForecast = () => {
     renderedItems = firstThreeItems.map((obj) => {
       return <MiniWeatherCard key={obj.dt_txt} data={obj} />;
     });
+  } else {
+    return (
+      <Box
+        sx={{
+          height: "40%",
+          width: "30%",
+          backgroundColor: "rgba(39,59,70,0.5)",
+          marginTop: "110px",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <CircularProgress />
+      </Box>
+    );
   }
   return (
     <Box
