@@ -2,7 +2,6 @@ import { Box, CircularProgress, Typography } from "@mui/material";
 import { useContext } from "react";
 import { SearchBarContext } from "../context/SearchBarContext";
 import { CurrentWeatherType } from "../types";
-import { capitalize } from "../helpers/utils";
 import WeatherCard from "./WeatherCard";
 
 const units = {
@@ -13,14 +12,9 @@ const CurrentWeather = () => {
   const { currentWeather } = useContext(SearchBarContext);
   const TypedData = currentWeather as CurrentWeatherType;
 
-  let currentTemp;
-  let weatherDesc;
-  let maxTemp;
-  let minTemp;
-  let feelsLike;
-  let humidity;
+  let currentTemp, weatherDesc, maxTemp, minTemp, feelsLike, humidity;
 
-  if (!TypedData.main) {
+  if (!Object.keys(TypedData).length) {
     return (
       <Box
         sx={{
@@ -37,12 +31,12 @@ const CurrentWeather = () => {
       </Box>
     );
   } else {
-    currentTemp = Math.round(TypedData.main.temp);
-    weatherDesc = capitalize(TypedData.weather[0].description);
-    maxTemp = Math.round(TypedData.main.temp_max);
-    minTemp = Math.round(TypedData.main.temp_min);
-    feelsLike = Math.round(TypedData.main.feels_like);
-    humidity = TypedData.main.humidity;
+    currentTemp = Math.round(TypedData?.main?.temp);
+    weatherDesc = TypedData?.weather[0]?.description;
+    maxTemp = Math.round(TypedData?.main?.temp_max);
+    minTemp = Math.round(TypedData?.main?.temp_min);
+    feelsLike = Math.round(TypedData?.main?.feels_like);
+    humidity = Math.round(TypedData?.main?.humidity);
   }
 
   return (
@@ -51,7 +45,6 @@ const CurrentWeather = () => {
         backgroundColor: "rgba(39,59,70,0.5)",
         width: "57%",
         height: "40%",
-        // margin: "0 auto",
         marginTop: "110px",
         display: "flex",
         justifyContent: "flex-start",
@@ -79,7 +72,6 @@ const CurrentWeather = () => {
         <Box
           sx={{
             height: "48%",
-
             display: "flex",
             flexDirection: "row",
             justifyContent: "space-between",
