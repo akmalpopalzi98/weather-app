@@ -21,7 +21,7 @@ const TodaysForecast = () => {
         height: "40%",
         width: "30%",
         backgroundColor: "rgba(39,59,70,0.5)",
-        marginTop: "40px",
+        marginTop: "110px",
         display: "flex",
         flexDirection: "column",
         justifyContent: "space-evenly",
