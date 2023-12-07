@@ -22,7 +22,17 @@ const CurrentWeather = () => {
 
   if (!TypedData.main) {
     return (
-      <Box>
+      <Box
+        sx={{
+          backgroundColor: "rgba(39,59,70,0.5)",
+          height: "40%",
+          width: "57%",
+          marginTop: "40px",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
         <CircularProgress />
       </Box>
     );
