@@ -1,30 +1,47 @@
-# React + TypeScript + Vite
+# Weather App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+The Weather App is a React-based web application that provides users with current weather information. It features a clean and user-friendly interface, making it easy for users to check the weather conditions in a specific location.
 
-Currently, two official plugins are available:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+![image](https://github.com/akmalpopalzi98/weather-app/assets/105284469/8c0138ef-1a4d-4247-96a5-b297dce1ddc2)
 
-## Expanding the ESLint configuration
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
 
-- Configure the top-level `parserOptions` property like this:
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
+Table of Contents
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+    Overview
+    Features
+    Technologies Used
+    Installation
+    Usage
+    Contributing
+    License
+
+# Features
+
+- Current Weather Display: View the current temperature, weather description, and additional details.
+- Responsive Design: The app is designed to provide a seamless experience on various devices.
+- 
+# Technologies Used
+
+- React.js: A JavaScript library for building user interfaces.
+- Material-UI: A popular React UI framework for designing modern and responsive web applications.
+- Context API: Utilized for state management, ensuring efficient data handling throughout the application.
+
+
+# Installation
+
+To run this project locally, follow these steps:
+
+    Clone the repository:
+    git clone [repository-url]
+    cd [project-directory]
+
+Install dependencies:
+
+    npm install
+
+Start the development server:
+
+    npm run dev
