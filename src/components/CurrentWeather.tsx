@@ -3,6 +3,7 @@ import { useContext } from "react";
 import { SearchBarContext } from "../context/SearchBarContext";
 import { CurrentWeatherType } from "../types";
 import WeatherCard from "./WeatherCard";
+import { capitalize } from "../helpers/utils";
 
 const units = {
   CELSIUS: "°C",
@@ -32,7 +33,7 @@ const CurrentWeather = () => {
     );
   } else {
     currentTemp = Math.round(TypedData?.main?.temp);
-    weatherDesc = TypedData?.weather[0]?.description;
+    weatherDesc = capitalize(TypedData?.weather[0]?.description);
     maxTemp = Math.round(TypedData?.main?.temp_max);
     minTemp = Math.round(TypedData?.main?.temp_min);
     feelsLike = Math.round(TypedData?.main?.feels_like);

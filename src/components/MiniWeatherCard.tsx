@@ -18,8 +18,7 @@ const MiniWeatherCard = ({ data }: { data: MiniCardType }) => {
       }}
     >
       <Typography sx={{ flexBasis: "25%" }}>
-        {date}
-        {amOrPm}
+        {date}:00 {amOrPm}
       </Typography>
       <img
         src={`https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`}
