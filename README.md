@@ -22,7 +22,8 @@ Table of Contents
 
 - Current Weather Display: View the current temperature, weather description, and additional details.
 - Responsive Design: The app is designed to provide a seamless experience on various devices.
-- 
+- Automatically detects user location
+
 # Technologies Used
 
 - React.js: A JavaScript library for building user interfaces.
