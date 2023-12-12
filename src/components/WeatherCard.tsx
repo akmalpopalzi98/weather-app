@@ -4,7 +4,6 @@ import { CurrentWeatherType } from "../types";
 export const units = {
   CELSIUS: "°C",
 };
-console.log(import.meta.env);
 
 const WeatherCard = ({
   weatherData,
