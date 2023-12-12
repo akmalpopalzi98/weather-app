@@ -7,7 +7,7 @@ const get_current_data = async (city: string, lat?: number, lon?: number) => {
       {
         params: {
           q: city || "London",
-          appid: "39beb0058dea7387317a41b76719c76e",
+          appid: import.meta.env.VITE_APP_ID,
           units: "metric",
         },
       }
@@ -18,7 +18,7 @@ const get_current_data = async (city: string, lat?: number, lon?: number) => {
       "https://api.openweathermap.org/data/2.5/weather",
       {
         params: {
-          appid: "39beb0058dea7387317a41b76719c76e",
+          appid: import.meta.env.VITE_APP_ID,
           units: "metric",
           lat: lat,
           lon: lon,
@@ -36,7 +36,7 @@ const get_forecast_data = async (city: string, lat?: number, lon?: number) => {
       {
         params: {
           q: city || "London",
-          appid: "39beb0058dea7387317a41b76719c76e",
+          appid: import.meta.env.VITE_APP_ID,
           units: "metric",
         },
       }
@@ -47,7 +47,7 @@ const get_forecast_data = async (city: string, lat?: number, lon?: number) => {
       "https://api.openweathermap.org/data/2.5/forecast",
       {
         params: {
-          appid: "39beb0058dea7387317a41b76719c76e",
+          appid: import.meta.env.VITE_APP_ID,
           units: "metric",
           lat: lat,
           lon: lon,
