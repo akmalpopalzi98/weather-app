@@ -43,6 +43,11 @@ Install dependencies:
 
     npm install
 
+Register with Open Weather and obtain API KEY:
+
+    VITE_API_KEY = YOUR API KEY // Create an .env file in the root folder
+
+    
 Start the development server:
 
     npm run dev
