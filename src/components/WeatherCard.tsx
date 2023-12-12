@@ -4,6 +4,7 @@ import { CurrentWeatherType } from "../types";
 export const units = {
   CELSIUS: "°C",
 };
+console.log(import.meta.env);
 
 const WeatherCard = ({
   weatherData,
@@ -40,7 +41,7 @@ const WeatherCard = ({
         {currentTemp + units.CELSIUS}
       </Typography>
       <Typography>{weatherDesc}</Typography>
-      <Typography>Today - {formattedCurrentDate}</Typography>
+      <Typography>{formattedCurrentDate}</Typography>
     </Box>
   );
 };

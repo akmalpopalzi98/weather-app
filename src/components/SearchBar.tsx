@@ -1,8 +1,9 @@
 import { Box } from "@mui/material";
 import { ChangeEvent, FormEvent, useContext, useEffect, useState } from "react";
 import { SearchBarContext } from "../context/SearchBarContext";
-import { get_current_data, get_forecast_data } from "../API";
 import useLocation from "../hooks/useLocation";
+import fetchForecastData from "../helpers/api/FetchForecast";
+import fetchCurrentData from "../helpers/api/FetchCurrentData";
 
 const SearchBar = () => {
   const { searchTerm, setSearchTerm, setCurrentWeather, setForecastWeather } =
@@ -15,29 +16,6 @@ const SearchBar = () => {
     return locationObj;
   };
 
-  const fetchCurrentData = async (city: string, lat?: number, lon?: number) => {
-    try {
-      const response = await get_current_data(city, lat, lon);
-      setCurrentWeather(response.data);
-    } catch (error) {
-      alert("Location not found");
-    }
-  };
-
-  const fetchForecastData = async (
-    city: string,
-    lat?: number,
-    lon?: number
-  ) => {
-    try {
-      const response = await get_forecast_data(city, lat, lon);
-      // setCurrentWeather(response.data);
-      setForecastWeather(response.data);
-    } catch (error) {
-      alert("Location not found");
-    }
-  };
-
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -45,12 +23,22 @@ const SearchBar = () => {
 
         if (locationObj) {
           const { latitude, longitude } = locationObj;
-          await fetchCurrentData(searchTerm, latitude, longitude);
-          await fetchForecastData(searchTerm, latitude, longitude);
+          await fetchCurrentData(
+            searchTerm,
+            setCurrentWeather,
+            latitude,
+            longitude
+          );
+          await fetchForecastData(
+            searchTerm,
+            setForecastWeather,
+            latitude,
+            longitude
+          );
         } else {
           // Handle case where location data is not available
-          fetchCurrentData(searchTerm);
-          fetchForecastData(searchTerm);
+          fetchCurrentData(searchTerm, setCurrentWeather);
+          fetchForecastData(searchTerm, setForecastWeather);
         }
       } catch (error) {
         console.error("Error fetching data:");
@@ -69,8 +57,8 @@ const SearchBar = () => {
     event.preventDefault();
     setValue("");
     // localStorage.setItem("store", searchTerm); May remove
-    await fetchCurrentData(searchTerm);
-    await fetchForecastData(searchTerm);
+    await fetchCurrentData(searchTerm, setCurrentWeather);
+    await fetchForecastData(searchTerm, setForecastWeather);
   };
 
   return (
