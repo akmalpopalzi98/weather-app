@@ -1,6 +1,5 @@
 import { createTheme, ThemeProvider } from "@mui/material";
 import { SearchBarProvider } from "./context/SearchBarContext";
-import "./app.css";
 import MainPage from "./pages/MainPage";
 
 const theme = createTheme({
