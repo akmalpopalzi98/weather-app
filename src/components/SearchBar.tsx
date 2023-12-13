@@ -35,13 +35,16 @@ const SearchBar = () => {
             latitude,
             longitude
           );
-        } else {
-          // Handle case where location data is not available
-          fetchCurrentData(searchTerm, setCurrentWeather);
-          fetchForecastData(searchTerm, setForecastWeather);
         }
       } catch (error) {
-        console.error("Error fetching data:");
+        // Handle geolocation error separately
+        if (error instanceof GeolocationPositionError) {
+          console.log("Geolocation error. Fallback to default location.");
+          await fetchCurrentData(searchTerm, setCurrentWeather);
+          await fetchForecastData(searchTerm, setForecastWeather);
+        } else {
+          console.error("Error fetching data:", error);
+        }
       }
     };
 
